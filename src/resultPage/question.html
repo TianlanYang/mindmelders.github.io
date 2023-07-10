@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Survey</title>
+		<link rel="stylesheet" href="./question.css">
+	</head>
+
+	<body>
+		<!-- <h1>S2C Plan</h1> -->
+		<h1>My Career Transition Plan</h1>
+		<h4>Complete each session. If you need assiatance or ideas just ask the STSA
+			AI Chat.</h4>
+
+		<!-- try to use a container -->
+		<div class="survey-questions">
+			<form action="" method="post" id="surveyForm">
+
+				<div class="question">
+					<label for="sport">Your favorite sport:<br></label>
+					<input type="text" id="sport" name="sport">
+				</div>
+	
+				<div class="question">
+					<label for="position">What is your favorite position in this sport?<br></label>
+					<input type="text" id="position" name="position">
+				</div>
+		
+				<div class="question">
+					<label for="subject">what is your favorite hobby?<br></label>
+					<input type="text" id="hobby" name="hobby">
+				</div>
+
+
+				<div class="question">
+					<label for="subject">What else do you enjoy doing, name one more hobby you enjoy doing.<br></label>
+					<input type="text" id="hobby2" name="hobby">
+				</div>
+
+				<div class="question">
+					<label for="subject">What is your favorite academic subject?<br></label>
+					<input type="text" id="subject" name="subject">
+				</div>
+
+				<div class="question">
+					<label for="career">What is your desired career? <br></label>
+					<input type="text" id="career" name="career">
+				</div>
+
+
+				<div class="question"">
+					<label for=" gpa">If you are a student, is your GPA in a good standing?<br></label>
+					<label for="option1">Yes</label>
+					<input type="radio" id="gpa_option1" name="gpa_option" value="Yes">
+
+					<label for="option2">No</label>
+					<input type="radio" id="gpa_option2" name="gpa_option" value="No">
+
+					<label for="option3">N/A</label>
+					<input type="radio" id="gpa_option3" name="gpa_option" value="N/A">
+				</div>
+
+				<div class="question"">
+					<label for=" college-student-major">If you are a college student, Do you
+						know your major or are you currently in a major that aligns with your
+						desired career?<br></label>
+
+					<label for="option1">Yes</label>
+					<input type="radio" id="major_option1" name="major_option" value="Yes">
+					<label for="option2">No</label>
+					<input type="radio" id="major_option2" name="major_option" value="No">
+					<label for="option3">N/A</label>
+					<input type="radio" id="major_option3" name="major_option" value="N/A">
+				</div>
+
+
+				<div class="question"">
+					<label for=" courses-in-college">Are you currently in courses or have you
+						taken courses that are aligned to your desired career?<br></label>
+
+					<label for="option1">Yes</label>
+					<input type="radio" id="courses_option1" name="courses_option" value="Yes">
+					<label for="option2">No</label>
+					<input type="radio" id="courses_option2" name="courses_option" value="No">
+				</div>
+
+				<div class="question"">
+					<label for=" ppl-pursue">Do you know someone who is alreay in the career
+						field you would like to pursue?<br></label>
+
+					<label for="option1">Yes</label>
+					<input type="radio" id="ppl_option1" name="ppl_option" value="Yes">
+
+					<label for="option2">No</label>
+					<input type="radio" id="ppl_option2" name="ppl_option" value="No">
+
+				</div>
+
+				<div class="question"">
+					<label for=" company">Do you have a company you want to work for?<br></label>
+					<label for="option1">Yes</label>
+					<input type="radio" id="company_option1" name="company_option" value="Yes">
+					<label for="option2">No</label>
+					<input type="radio" id="company_option2" name="company_option" value="No">
+				</div>
+
+				
+				<div class="question">
+					<label for="strengths">If you habe taken the Gallup Strengths
+						Assessment,What are your top 5 strengths?<br></label>
+					1.&ensp;<input type="text" id="strengths1" name="strengths1"><br>
+					2.&ensp;<input type="text" id="strengths2" name="strengths2"><br>
+					3.&ensp;<input type="text" id="strengths3" name="strengths3"><br>
+					4.&ensp;<input type="text" id="strengths4" name="strengths4"><br>
+					5.&ensp;<input type="text" id="strengths5" name="strengths5"><br>
+
+				</div>
+				<div class="question">
+					<label for="goals">Write 3 golas or tasks you will do in the next 3 months.
+						They can be eduactional, professional or career goals.<br></label>
+					1.&ensp;<input type="text" id="goals1" name="goals1"><br>
+					2.&ensp;<input type="text" id="goals2" name="goals2"><br>
+					3.&ensp;<input type="text" id="goals3" name="goals3"><br>
+
+				</div>
+
+				<div class="question">
+					<label for="support-person">Identify a support person who can keep you
+						accountable to your goals.<br></label>
+					1.&ensp;<input type="text" id="support_person1" name="support_person1"><br>
+					2.&ensp;<input type="text" id="support_person2" name="support_person2"><br>
+				</div>
+
+
+				<div class="question">
+					<label for="submit">After you are finish writing your plan, complete the
+						system survey</label><br><br>
+					<button id="submit1" type="submit">Submit</button>
+				</div>
+
+
+				<!-- the survey for this questionnare itself -->
+				<div class="question">
+					<!-- <label for="submit"></label><br><br> -->
+					<button id="submitSurvey">System Survey</button>
+				</div>
+
+
+			
+
+				</form>
+		</div>
+
+			
+		
+
+
+			
+
+			<!-- firebase -->
+			<script type="module">
+				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+
+				import { getDatabase, get, set, update, remove, ref, child }
+					from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+
+				// Your web app's Firebase configuration
+				const firebaseConfig = {
+					apiKey: "AIzaSyCkahzJE1QQxekDHPVHp4jM2CGS9MJuHyQ",
+					authDomain: "stsa-compass.firebaseapp.com",
+					projectId: "stsa-compass",
+					storageBucket: "stsa-compass.appspot.com",
+					messagingSenderId: "952259702189",
+					appId: "1:952259702189:web:0c4104d466caf2e7974524"
+				};
+
+
+				// Initialize Firebase
+				const app = initializeApp(firebaseConfig);
+				const db = getDatabase(app);
+
+				const conversationInDb = ref(db);
+
+
+				//reference
+				//var name = document.getElementById('name');
+				var sport = document.getElementById('sport');
+				//var soft_skill = document.getElementById('soft_skill');
+				var position = document.getElementById('position');
+
+				var hobby = document.getElementById('hobby');
+				var hobby2 = document.getElementById('hobby2');
+				var subject = document.getElementById('subject');
+				//var soft_skill_position = document.getElementById('soft_skill_position');
+				var career = document.getElementById('career');
+
+				var gpa_option1 = document.getElementById('gpa_option1');
+				var gpa_option2 = document.getElementById('gpa_option2');
+				var gpa_option3 = document.getElementById('gpa_option3');
+
+				var major_option1 = document.getElementById('major_option1');
+				var major_option2 = document.getElementById('major_option2');
+				var major_option3 = document.getElementById('major_option3');
+
+				var courses_option1 = document.getElementById('courses_option1');
+				var courses_option2 = document.getElementById('courses_option2');
+
+
+				var ppl_option1 = document.getElementById('ppl_option1');
+				var ppl_option2 = document.getElementById('ppl_option2');
+
+				var company_option1 = document.getElementById('company_option1');
+				var company_option2 = document.getElementById('company_option2');
+
+
+				var strengths1 = document.getElementById('strengths1');
+				var strengths2 = document.getElementById('strengths2');
+				var strengths3 = document.getElementById('strengths3');
+				var strengths4 = document.getElementById('strengths4');
+				var strengths5 = document.getElementById('strengths5');
+
+				var goals1 = document.getElementById('goals1');
+				var goals2 = document.getElementById('goals2');
+				var goals3 = document.getElementById('goals3');
+
+
+				var support_person1 = document.getElementById('support_person1');
+				var support_person2 = document.getElementById('support_person2');
+
+
+				var submitBtn = document.getElementById('submit1');
+
+				var username = localStorage.getItem('username');
+				console.log(username);
+
+
+				//insert data to database
+				function insertData() {
+					event.preventDefault();
+					//console.log("inserData works");
+					
+					set(ref(db, "/UserList/" + username +  "/Answers"), {
+						
+						//Name: name.value,
+						Sport: sport.value,
+						//Soft_skill: soft_skill.value,
+						Position: position.value,
+						Hobby: hobby.value,
+						Hobby2: hobby2.value,
+
+						Subject: subject.value,
+						//Soft_skill_position: soft_skill_position.value,
+						Career: career.value,
+
+						Gpa_option1: gpa_option1.value,
+						Gpa_option2: gpa_option2.value,
+						Gpa_option3: gpa_option3.value,
+						Major_option1: major_option1.value,
+						Major_option2: major_option2.value,
+						Major_option3: major_option3.value,
+						Courses_option1: courses_option1.value,
+						Courses_option2: courses_option2.value,
+						Ppl_option1: ppl_option1.value,
+						Ppl_option2: ppl_option2.value,
+						Company_option1: company_option1.value,
+						Company_option2: company_option2.value,
+
+
+						Strengths1: strengths1.value,
+						Strengths2: strengths2.value,
+						Strengths3: strengths3.value,
+						Strengths4: strengths4.value,
+						Strengths5: strengths5.value,
+
+						Goals1: goals1.value,
+						Goals2: goals2.value,
+						Goals3: goals3.value,
+
+						Support_person1: support_person1.value,
+						Support_person2: support_person2.value
+
+					})
+						.then(() => {
+							alert("data stored sucessfully!")
+							window.location.href = 'result.html';
+						})
+						.catch((error) => {
+							alert("Uncessfully stored!" + error)
+						});
+
+				}
+				
+
+				//only submit or enter will bring to next page,but not the submit survey btn.
+				submit1.addEventListener("click", insertData);
+
+			</script>
+		</body>
+
+	</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3868895_h8oc368jh7.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="./dist/output.css"> -->
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="welcome-mgs">
+                <h2>Welcome to My <br> STSA Compass </h2>
+                <h4>See how your future works here.</h4>
+            </div>
+            <form class="personal-form">
+                <div class="form-item">
+                    <input class='username' name='username' id='username' type="text" placeholder="Your Name"
+                        autocomplete="off">
+                    <span class='spanUser'></span>
+                    <i class="iconfont icon-duigou1"></i>
+                </div>
+                <div class="form-item">
+                    <input name='email' type="email" id='email' placeholder="Your Email" autocomplete="off">
+                </div>
+                <div class="form-item">
+                    <input list='school-list' name='gender' id='schoolName' type="text" placeholder="School Name"
+                        autocomplete="off">
+                </div>
+                <div class="form-item">
+                    <input class='password' id='password1' type="password" placeholder="Please enter your password"
+                        autocomplete="off">
+                    <p class="pPsd"></p>
+                    <i class="iconfont icon-duigou1"></i>
+                    <span class="toggle-password">👁️</span>
+                </div>
+                <div class="form-item">
+                    <input class="password" name="confirm" id="password" type="password"
+                        placeholder="Please confirm your password" autocomplete="off">
+                    <span class="toggle-password">👁️</span>
+                </div>
+                <div class="form-policy">
+                    <i class="iconfont icon-quhe-icon_gouxuan"></i>
+                    &nbsp I've read and agree to &nbsp<i>the User Service Agreement</i>
+                </div>
+                <button class="register-button" id="register_btn">Register</button>
+                <button class="login-button" type="button"
+                    onclick="location.href='login.html'">Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const toggles = document.querySelectorAll(".toggle-password")
+        toggles.forEach(text => {
+            text.addEventListener('click', () => {
+                const password = document.querySelectorAll('.password')
+
+                password.forEach(text1 => {
+                    if (text1.type === 'password') {
+                        text1.type = 'text';
+                        toggles.textContent = '👁️'
+                    } else {
+                        text1.type = 'password'
+                        toggles.textContent = '👁️'
+                    }
+                })
+            })
+        })
+
+        //Regular expressions to determine username, email, etc. input requirements
+        const regUser = /^[a-zA-Z0-9-_ ]{3,20}$/
+        const inputUser = document.querySelector('.username')
+        const spanUser = inputUser.nextElementSibling
+        const iUser = inputUser.nextElementSibling.nextElementSibling
+        iUser.style.display = 'none'
+        inputUser.addEventListener('blur', function () {
+            if (regUser.test(this.value.trim())) {
+                iUser.style.display = 'block'
+                spanUser.style.display = 'none'
+            } else if (!regUser.test(this.value.trim())) {
+                iUser.style.display = 'none'
+                spanUser.style.display = 'block'
+                spanUser.innerHTML = 'Username is not valid. It should between 3-12 Characters'
+            }
+        })
+
+        const regPsd = /^[a-zA-Z0-9-_]{6,}$/
+        const inputPsd = document.querySelector('.password')
+        const pPsd = inputPsd.nextElementSibling
+        const iPsd = inputPsd.nextElementSibling.nextElementSibling
+        iPsd.style.display = 'none'
+        inputPsd.addEventListener('blur', function () {
+            if (regPsd.test(this.value.trim())) {
+                iPsd.style.display = 'block'
+                pPsd.style.display = 'none'
+            } else if (!regPsd.test(this.value.trim())) {
+                iPsd.style.display = 'none'
+                pPsd.style.display = 'block'
+                pPsd.innerHTML = 'Username is not valid. It should larger than 6 Characters'
+            }
+        })
+    </script>
+
+
+
+    <!-- firebase login/register database and set up -->
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+
+        import { getDatabase, get, set, update, remove, ref, child }
+            from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkahzJE1QQxekDHPVHp4jM2CGS9MJuHyQ",
+            authDomain: "stsa-compass.firebaseapp.com",
+            projectId: "stsa-compass",
+            storageBucket: "stsa-compass.appspot.com",
+            messagingSenderId: "952259702189",
+            appId: "1:952259702189:web:0c4104d466caf2e7974524"
+        };
+
+
+
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const auth = getAuth(app);
+
+
+
+        //refrence
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const schoolName = document.getElementById('schoolName');
+        const pass = document.getElementById('password1');
+        const register_btn = document.getElementById('register_btn');
+
+
+
+        //add data to database
+
+        function RegisterUser() {
+
+            event.preventDefault();
+
+            const dbRef = ref(db);
+
+            get(child(dbRef, "/UserList/" + username.value + "/Credentials")).then((snapshot) => {
+
+                if (snapshot.exists()) {
+
+                    alert("Account already exists!");
+                } else {
+                    createUserWithEmailAndPassword(auth, email.value, pass.value)
+                        .then((userCredential) => {
+                            // The user has been created successfully
+                            const user = userCredential.user;
+
+                            set(ref(db, "UserList/" + username.value + "/Credentials"), {
+
+                                fullname: username.value,
+                                email: email.value,
+                               
+                                schoolName: schoolName.value
+                            })
+                                .then(() => {
+
+                                    alert("user added successfully!")
+                                    saveUsername();
+
+                                })
+                                .catch((error) => {
+                                    alert("error" + error);
+                                })
+                        })
+                        .catch((error) => {
+                            // There was an error in creating the user
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            alert("Error in creating user: " + errorCode + " " + errorMessage);
+                        });
+                }
+            });
+
+            //console.log(username.value);
+            
+        }
+        register_btn.addEventListener('click', RegisterUser);
+
+        //save username, so I can use it in question.html, therefore, question.html doesn't have to have Username
+        function saveUsername(){
+
+            localStorage.setItem('username', username.value);
+            
+        }
+
+    </script>
+
+
+
+</body>
+
+
+</html>
